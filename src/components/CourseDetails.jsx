@@ -7,38 +7,21 @@ const CourseDetails = ({ course, onPageChange }) => {
     name: '',
     email: '',
     phone: '',
-    message: ''
+    message: '',
   });
 
   // ✅ Use environment variable for backend URL (Render)
-  const API_URL = import.meta.env.VITE_API_URL;
+  const API_URL = import.meta.env.VITE_API_URL || 'https://growtech-wfn3.onrender.com';
 
   const handleInputChange = (e) => {
     setApplicationData({
       ...applicationData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
-<<<<<<< HEAD
- const handleSubmitApplication = async (e) => {
-  e.preventDefault();
-  
-  try {
-    const response = await fetch('https://growtech-wfn3.onrender.com/api/applications/submit', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        ...applicationData,
-        courseTitle: course.title
-      }),
-    });
-=======
   const handleSubmitApplication = async (e) => {
     e.preventDefault();
->>>>>>> 5f30e27 (boyy)
 
     try {
       const response = await fetch(`${API_URL}/api/applications/submit`, {
@@ -73,10 +56,7 @@ const CourseDetails = ({ course, onPageChange }) => {
         <div className="container">
           <div className="error-message">
             <h2>Course not found</h2>
-            <button
-              className="btn-primary"
-              onClick={() => onPageChange('courses')}
-            >
+            <button className="btn-primary" onClick={() => onPageChange('courses')}>
               Back to Courses
             </button>
           </div>
@@ -109,10 +89,9 @@ const CourseDetails = ({ course, onPageChange }) => {
             <div className="course-description-full">
               <h2>Course Description</h2>
               <p>
-                {course.description} This comprehensive course is designed to
-                take you from complete beginner to confident practitioner.
-                You'll learn through hands-on projects, real-world examples, and
-                expert guidance.
+                {course.description} This comprehensive course is designed to take you
+                from complete beginner to confident practitioner. You'll learn through
+                hands-on projects, real-world examples, and expert guidance.
               </p>
 
               <h3>What You'll Learn</h3>
@@ -187,10 +166,7 @@ const CourseDetails = ({ course, onPageChange }) => {
                 </button>
               </div>
 
-              <form
-                onSubmit={handleSubmitApplication}
-                className="application-form"
-              >
+              <form onSubmit={handleSubmitApplication} className="application-form">
                 <div className="form-group">
                   <label htmlFor="name">Full Name</label>
                   <input
@@ -228,9 +204,7 @@ const CourseDetails = ({ course, onPageChange }) => {
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="message">
-                    Why are you interested in this course?
-                  </label>
+                  <label htmlFor="message">Why are you interested in this course?</label>
                   <textarea
                     id="message"
                     name="message"
